@@ -1,81 +1,104 @@
+<!--
+  MIT License
+  
+  Copyright (c) 2021 Bruno Andrade
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE
+  -->
 # Cadastro de cervejas artesanais
 
 O objetivo deste projeto é avaliar o desenvolvimento de uma aplicação java utilizando Spring e APIs.
 
 ### Baseado no [Building an Application with Spring Boot](https://spring.io/guides/gs/spring-boot/).
 
+## Set up environment:
 
-## Set up environment
-
-Para iniciar o projeto é necessário realizar o clone deste repositório
+Para iniciar o projeto é necessário realizar o clone deste repositório:
 
 ```bash
     $ git clone https://github.com/Sensedia/craftbeer.git
 ```
 
-Você deverá compartilhar no seu repositório do github as alterações solicitadas para o projeto. 
-O endereço deste repositório deverá ser enviado para rh@sensedia.com
+Você deverá compartilhar no seu repositório do GitHub as alterações solicitadas para o projeto.<br />
+O endereço deste repositório deverá ser enviado para `rh@sensedia.com`.
 
-## Especificação do projeto
+## Especificação do projeto:
 
-A beer house é uma empresa possui um catálogo de cervejas artesanais. Esta empresa está buscando entrar no mundo digital.
-Para entrar no mundo digital a beer house dicidiu começar pelas APIs. As APIs serão utilizadas para compartilhar dados com os parceiros e também para o seu sistema web.
+A Beer House é uma empresa que possui um catálogo de cervejas artesanais e está buscando entrar no mundo digital.<br />
+Para isto, a Beer House dicidiu começar pelas APIs.<br />
+As APIs serão utilizadas para compartilhar dados com os parceiros e também para o seu sistema web.
 
-Pra atender a esta demanda será necessário que a você implemente as APIs do projeto beer house.
+Para atender a esta demanda será necessário que você implemente as APIs do projeto Beer House.
 
-Para implementar estas APIs você dever seguir a especificação do swagger que está neste projeto.
+Para implementar estas APIs você deverá seguir a especificação do Swagger que está neste projeto:
 
-    craftbeer
-    |
-    |docs
-    |    |___swagger-craftbeer
+* craftbeer
+  * docs
+    * swagger-craftbeer
+
+## Requisitos do projeto:
+
+1. Administrar cervejas:
+
+  - O sistema deverá ter um cadastro de cervejas artesanais por API.
+  - O sistema deverá ser capaz de criar, excluir e alterar as cervejas.
 
 
-## Requisitos do projeto
+2. Sistema deverá armazenar os dados em banco de dados:
 
-1. Administrar cervejas: 
+  - Poderá ser utilizado MYSQL ou qualquer banco de dados embbeded.
+    - Caso seja utilizado o MYSQL, adicionar o script para criação do banco.
+  - A comunicação com o sistema deverá ser feita através de JPA.
 
-- O sistema deverá ter um cadastro de cervejas artesanais por API.<br/>
-- O sistema deverá ser capaz de criar, excluir e alterar as cervejas.
-   
-2. Sistema deverá armazenar os dados em banco de dados. 
- 
-- Poderá ser utilizado MYSQL ou qualquer banco de dados embbeded.<br/>
-  Caso seja utilizado o MYSQL, adicionar o script para criação do banco.
-- A comunicação com o sistema deverá ser feita através de JPA.
 
-3. O sistema deve conter testes unitários com JUnit
+3. O sistema deve conter testes unitários com JUnit.
 
 4. O sistema deve conter uma forma de validar o funcionamento.
-   
-- Deverá ser diponibilizado uma coleção do postman ou soapui para testar todos os recursos
 
-## O que será avaliado no projeto
+5. Deverá ser diponibilizado uma coleção do Postman ou SoapUI para testar todos os recursos.
 
-- Qualidade de código
-- Design patterns utilizados
-- O sistema tem que estar completo e possuir todos os scripts necessários para a execução
-- A utilização do JPA de forma correta
-- A criação de testes unitários
+## O que será avaliado no projeto:
+
+- Qualidade de código.
+- Design Patterns utilizados.
+- O sistema tem que estar completo e possuir todos os scripts necessários para a execução.
+- A utilização do JPA de forma correta.
+- A criação de testes unitários.
 
 ## O que você deve fazer:
 
 - Utilizar java ao máximo e mostrar todo o seu conhecimento.
-- Entregar o projeto completo
+- Entregar o projeto completo.
 - Usar Java 8 e deixar a gente bem feliz com isso!
 
 ## O que você pode fazer:
 
-- Utilizar frameworks
+- Utilizar frameworks.
 - Utilizar Spring Data ou qualquer outro framework para JPA.
-- Alterar e criar o código à vontade
-- Consultar tutoriais, consultar fóruns e tirar dúvidas
+- Alterar e criar o código à vontade.
+- Consultar tutoriais, consultar fóruns e tirar dúvidas.
 - Você pode aprender com código de outras pessoas, utilizar trechos, mas não usar tudo igual.
 
 ## O que você não pode fazer:
 
-- Copiar de outros candidatos
-- Pedir alguém para fazer o projeto para você
+- Copiar de outros candidatos.
+- Pedir alguém para fazer o projeto para você.
 
 ## Links de sugestão:
 
