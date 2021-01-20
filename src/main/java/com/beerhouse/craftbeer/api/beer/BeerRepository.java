@@ -21,32 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
-package com.beerhouse.craftbeer.api.model.beer;
+package com.beerhouse.craftbeer.api.beer;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * This class is responsible for all requests from Beers.
+ * This classe encapsules Beer's logic from database.
  *
  * @author Bruno Andrade
  * @since 1.0
  */
-@Controller
-@RequestMapping(path = "/api/v1/beers")
-public class BeerController {
-
-  /**
-   * Simple test /hello endpoint.
-   *
-   * @return String with a welcome message.
-   */
-  @GetMapping(path = "/hello")
-  @ResponseBody
-  public String hello() {
-    return "Craft Beers Api Manager!";
-  }
-
-}
+@Repository
+public interface BeerRepository extends JpaRepository<Beer, Long> {}

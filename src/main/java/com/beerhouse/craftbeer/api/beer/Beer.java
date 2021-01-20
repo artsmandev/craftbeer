@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
-package com.beerhouse.craftbeer.api.model.beer;
+package com.beerhouse.craftbeer.api.beer;
 
 import static java.util.Objects.hash;
 import static javax.persistence.GenerationType.IDENTITY;
