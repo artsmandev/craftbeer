@@ -56,10 +56,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/beers")
 public class BeerController {
-  private BeerRepository repository;
+  private BeerService service;
 
-  public BeerController(BeerRepository repository) {
-    this.repository = repository;
+  public BeerController(BeerService service) {
+    this.service = service;
   }
 
   /**
@@ -70,7 +70,7 @@ public class BeerController {
   @PostMapping
   @ResponseStatus(CREATED)
   public void saveBeer(@RequestBody Beer beerRequest) {
-    repository.save(beerRequest);
+    service.save(beerRequest);
   }
 
   /**
@@ -80,7 +80,7 @@ public class BeerController {
    */
   @GetMapping
   public ResponseEntity<List<Beer>> allBeers() {
-    var beers = repository.findAll();
+    var beers = service.findAll();
     if (beers.isEmpty()) {
       return noContent().build();
     }
@@ -95,7 +95,7 @@ public class BeerController {
    */
   @GetMapping("/{id}")
   public ResponseEntity<Beer> findBeerById(@PathVariable long id) {
-    var beer = repository.findById(id);
+    var beer = service.findById(id);
     return beer.map(ResponseEntity::ok).orElseGet(
       () -> notFound().build()
     );
@@ -104,16 +104,16 @@ public class BeerController {
   /**
    * Update an specific Beer already exists.
    *
-   * @param id that represents the specific Beer
+   * @param id that represents the specific Beer.
    * @param beerRequest json that represents a new beer to be updated.
    * @return beer's representation  in json updated with status code 200, or, not found with status code 404.
    */
   @PutMapping("/{id}")
   public ResponseEntity<Beer> updateBeer(@PathVariable long id, @RequestBody Beer beerRequest) {
-    var beerFound = repository.findById(id);
+    var beerFound = service.findById(id);
     if (beerFound.isPresent()) {
       copyProperties(beerRequest, beerFound.get(), "id");
-      repository.save(beerFound.get());
+      service.save(beerFound.get());
       return ok(beerFound.get());
     }
     return notFound().build();
@@ -128,7 +128,7 @@ public class BeerController {
    */
   @PatchMapping("/{id}")
   public ResponseEntity<Beer> updatePartialBeer(@PathVariable long id, @RequestBody Map<String, Object> beerFields) {
-    var beerFound = repository.findById(id);
+    var beerFound = service.findById(id);
     if (beerFound.isPresent()) {
       updateBeerFieldsOnBeerFound(beerFields, beerFound.get());
       updateBeer(id, beerFound.get());
@@ -148,7 +148,6 @@ public class BeerController {
   private void updateBeerFieldsOnBeerFound(Map<String, Object> beerFields, Beer beerFound) {
     var mapper = new ObjectMapper();
     var beerRequestFromFields = mapper.convertValue(beerFields, Beer.class);
-
     beerFields.forEach((nameField, valueField) -> {
       var field = findField(Beer.class, nameField);
       field.setAccessible(true);
@@ -165,9 +164,9 @@ public class BeerController {
    */
   @DeleteMapping("/{id}")
   public ResponseEntity<Beer> deleteBeer(@PathVariable long id) {
-    var beerFound = repository.findById(id);
+    var beerFound = service.findById(id);
     if (beerFound.isPresent()) {
-      repository.delete(beerFound.get());
+      service.delete(beerFound.get());
       return noContent().build();
     }
     return notFound().build();

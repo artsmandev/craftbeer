@@ -45,11 +45,20 @@ public class Beer {
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private long id;
+
+  @Column(nullable = false)
   private String name;
+
+  @Column(nullable = false)
   private String ingredients;
-  @Column(name = "alcohol_content")
+
+  @Column(name = "alcohol_content", nullable = false)
   private byte alcoholContent;
+
+  @Column(nullable = false)
   private BigDecimal price;
+
+  @Column(nullable = false)
   private String category;
 
   public long getId() {
