@@ -132,7 +132,7 @@ public class BeerController {
     if (beerFound.isPresent()) {
       updateBeerFieldsOnBeerFound(beerFields, beerFound.get());
       updateBeer(id, beerFound.get());
-      return ok().build();
+      return ok(beerFound.get());
     }
     return notFound().build();
   }
