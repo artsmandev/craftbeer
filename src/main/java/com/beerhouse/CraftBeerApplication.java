@@ -23,9 +23,9 @@
  */
 package com.beerhouse;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import static org.springframework.boot.SpringApplication.run;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * This class perform auto-configuration, component-scan, define extra configurations and execute the startup of our

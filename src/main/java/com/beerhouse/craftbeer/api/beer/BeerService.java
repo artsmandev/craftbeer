@@ -23,10 +23,9 @@
  */
 package com.beerhouse.craftbeer.api.beer;
 
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
 /**
  * Extra layer in order to {@link BeerController} do not manipulate the {@link BeerRepository} directly.
