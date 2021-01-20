@@ -23,47 +23,13 @@
  */
 package com.beerhouse.craftbeer.api.beer;
 
-import static javax.persistence.EnumType.STRING;
-import static javax.persistence.GenerationType.IDENTITY;
-
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import java.math.BigDecimal;
-import javax.persistence.*;
-
 /**
- * This class represents a Beer.
+ * This class representes Beer's categories.
  *
  * @author Bruno Andrade
  * @since 1.0
  */
-@Entity
-@Table(name = "beer")
-@Getter
-@Setter
-@EqualsAndHashCode(of = "id")
-@ToString
-public class Beer {
-  @Id
-  @GeneratedValue(strategy = IDENTITY)
-  private long id;
-
-  @Column(nullable = false)
-  private String name;
-
-  @Column(nullable = false)
-  private String ingredients;
-
-  @Column(name = "alcohol_content", nullable = false)
-  private byte alcoholContent;
-
-  @Column(nullable = false)
-  private BigDecimal price;
-
-  @Column(nullable = false)
-  @Enumerated(STRING)
-  private Category category;
-
+public enum Category {
+  ALE,
+  LAGER
 }
