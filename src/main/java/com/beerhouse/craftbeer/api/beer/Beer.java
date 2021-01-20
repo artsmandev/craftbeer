@@ -23,9 +23,12 @@
  */
 package com.beerhouse.craftbeer.api.beer;
 
-import static java.util.Objects.hash;
 import static javax.persistence.GenerationType.IDENTITY;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,6 +44,10 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "beer")
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
+@ToString
 public class Beer {
   @Id
   @GeneratedValue(strategy = IDENTITY)
@@ -60,83 +67,5 @@ public class Beer {
 
   @Column(nullable = false)
   private String category;
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getIngredients() {
-    return ingredients;
-  }
-
-  public void setIngredients(String ingredients) {
-    this.ingredients = ingredients;
-  }
-
-  public byte getAlcoholContent() {
-    return alcoholContent;
-  }
-
-  public void setAlcoholContent(byte alcoholContent) {
-    this.alcoholContent = alcoholContent;
-  }
-
-  public BigDecimal getPrice() {
-    return price;
-  }
-
-  public void setPrice(BigDecimal price) {
-    this.price = price;
-  }
-
-  public String getCategory() {
-    return category;
-  }
-
-  public void setCategory(String category) {
-    this.category = category;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Beer beer = (Beer) o;
-    return id == beer.id;
-  }
-
-  @Override
-  public int hashCode() {
-    return hash(id);
-  }
-
-  @Override
-  public String toString() {
-    return new StringBuffer("Beer{")
-                    .append("id=").append(id)
-                    .append(", name='").append(name).append('\'')
-                    .append(", ingredients='").append(ingredients).append('\'')
-                    .append(", alcoholContent=").append(alcoholContent)
-                    .append(", price=").append(price)
-                    .append(", category='").append(category).append('\'')
-                    .append('}')
-                    .toString();
-  }
 
 }
