@@ -19,4 +19,5 @@
 -- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE
-insert into beer(alcohol_content, category, ingredients, name, price) values (10, "category a", "water, yeast", "budweiser", 10.00);
+insert into beer(name, ingredients, alcohol_content, category, price) values("Craft Beer Ale", "water, yeast", 51, "ALE", 10.50);
+insert into beer(name, ingredients, alcohol_content, category, price) values("Craft Beer Lager", "water, yeast", 13, "LAGER", 10.50);

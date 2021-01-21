@@ -24,12 +24,11 @@
 package com.beerhouse.craftbeer.api.beer;
 
 /**
- * This class representes Beer's categories.
+ * This enum represents Beer's categories.
  *
  * @author Bruno Andrade
  * @since 1.0
  */
 public enum Category {
-  ALE,
-  LAGER
+  ALE, LAGER
 }

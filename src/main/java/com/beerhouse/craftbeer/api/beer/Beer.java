@@ -31,7 +31,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import java.math.BigDecimal;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * This class represents a Beer.
@@ -43,11 +48,12 @@ import javax.persistence.*;
 @Table(name = "beer")
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Beer {
   @Id
   @GeneratedValue(strategy = IDENTITY)
+  @EqualsAndHashCode.Include
   private long id;
 
   @Column(nullable = false)
@@ -60,10 +66,9 @@ public class Beer {
   private byte alcoholContent;
 
   @Column(nullable = false)
-  private BigDecimal price;
-
-  @Column(nullable = false)
   @Enumerated(STRING)
   private Category category;
 
+  @Column(nullable = false)
+  private BigDecimal price;
 }
