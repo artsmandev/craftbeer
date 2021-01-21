@@ -25,15 +25,11 @@ spring:
   datasource:
     url: jdbc:mariadb://localhost/craftbeer?createDatabaseIfNotExist=true&serverTimezone=UTC
     username: root
-    password: passwd
+    password: root
     hikari:
       maximum-pool-size: 6
       minimum-idle: 4
       idle-timeout: 10000
-  jpa:
-    generate-ddl: true
-    hibernate:
-      ddl-auto: create
 server:
   port: 8080
   servlet:
