@@ -20,4 +20,4 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE
 insert into beer(name, ingredients, alcohol_content, category, price) values("Craft Beer Ale", "water, yeast", 51, "ALE", 10.50);
-insert into beer(name, ingredients, alcohol_content, category, price) values("Craft Beer Lager", "water, yeast", 13, "LAGER", 10.50);
+insert into beer(name, ingredients, alcohol_content, category, price) values("Craft Beer Lager", "malted barley, hops", 13, "LAGER", 10.50);

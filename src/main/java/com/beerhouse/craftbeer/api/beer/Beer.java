@@ -54,7 +54,7 @@ public class Beer {
   @Id
   @GeneratedValue(strategy = IDENTITY)
   @EqualsAndHashCode.Include
-  private long id;
+  private Long id;
 
   @Column(nullable = false)
   private String name;

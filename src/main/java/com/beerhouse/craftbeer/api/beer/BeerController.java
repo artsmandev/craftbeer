@@ -94,7 +94,7 @@ public class BeerController {
    * @return beer's representation in json the specific beer with status code 200, or, not found with status code 404.
    */
   @GetMapping("/{id}")
-  public ResponseEntity<Beer> findBeerById(@PathVariable long id) {
+  public ResponseEntity<Beer> findBeerById(@PathVariable Long id) {
     var beer = service.findById(id);
     return beer.map(ResponseEntity::ok).orElseGet(
       () -> notFound().build()
@@ -109,7 +109,7 @@ public class BeerController {
    * @return beer's representation  in json updated with status code 200, or, not found with status code 404.
    */
   @PutMapping("/{id}")
-  public ResponseEntity<Beer> updateBeer(@PathVariable long id, @RequestBody Beer beerRequest) {
+  public ResponseEntity<Beer> updateBeer(@PathVariable Long id, @RequestBody Beer beerRequest) {
     var beerFound = service.findById(id);
     if (beerFound.isPresent()) {
       copyProperties(beerRequest, beerFound.get(), "id");
@@ -127,7 +127,7 @@ public class BeerController {
    * @return beer's representation  in json with status code 200, or, not found and status code 404.
    */
   @PatchMapping("/{id}")
-  public ResponseEntity<Beer> updatePartialBeer(@PathVariable long id, @RequestBody Map<String, Object> beerFields) {
+  public ResponseEntity<Beer> updatePartialBeer(@PathVariable Long id, @RequestBody Map<String, Object> beerFields) {
     var beerFound = service.findById(id);
     if (beerFound.isPresent()) {
       updateBeerFieldsOnBeerFound(beerFields, beerFound.get());
@@ -163,7 +163,7 @@ public class BeerController {
    * @return beer's representation in json with status code 204, or, not found and status code 404.
    */
   @DeleteMapping("/{id}")
-  public ResponseEntity<Beer> deleteBeer(@PathVariable long id) {
+  public ResponseEntity<Beer> deleteBeer(@PathVariable Long id) {
     var beerFound = service.findById(id);
     if (beerFound.isPresent()) {
       service.delete(beerFound.get());
