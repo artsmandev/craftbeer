@@ -21,7 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
-package com.beerhouse.craftbeer.api.beer;
+package com.beerhouse.craftbeer.api.domain.category;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * This enum represents Beer's categories.
@@ -29,6 +44,21 @@ package com.beerhouse.craftbeer.api.beer;
  * @author Bruno Andrade
  * @since 1.0
  */
-public enum Category {
-  ALE, LAGER
+@NoArgsConstructor
+@RequiredArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
+@Entity
+@Table(name = "category")
+public class Category {
+  @EqualsAndHashCode.Include
+  @Id
+  @GeneratedValue(strategy = IDENTITY)
+  private Long id;
+
+  @NonNull
+  @Column(nullable = false, unique = true)
+  private String name;
 }

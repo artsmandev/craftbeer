@@ -21,54 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
-package com.beerhouse.craftbeer.api.beer;
+package com.beerhouse.craftbeer.api.domain.ingredient;
 
-import static javax.persistence.EnumType.STRING;
-import static javax.persistence.GenerationType.IDENTITY;
-
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
- * This class represents a Beer.
+ * This classe encapsules Ingredient's logic from database.
  *
  * @author Bruno Andrade
  * @since 1.0
  */
-@Entity
-@Table(name = "beer")
-@Getter
-@Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
-public class Beer {
-  @Id
-  @GeneratedValue(strategy = IDENTITY)
-  @EqualsAndHashCode.Include
-  private Long id;
-
-  @Column(nullable = false)
-  private String name;
-
-  @Column(nullable = false)
-  private String ingredients;
-
-  @Column(name = "alcohol_content", nullable = false)
-  private byte alcoholContent;
-
-  @Column(nullable = false)
-  @Enumerated(STRING)
-  private Category category;
-
-  @Column(nullable = false)
-  private BigDecimal price;
-}
+@Repository
+interface IngredientRepository extends JpaRepository<Ingredient, Long> {}

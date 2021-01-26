@@ -21,12 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
-package com.beerhouse.craftbeer.api.beer;
+package com.beerhouse.craftbeer.api.domain.beer;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.ResponseEntity.noContent;
-import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.util.ReflectionUtils.findField;
 import static org.springframework.util.ReflectionUtils.getField;
@@ -55,7 +54,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/v1/beers")
-public class BeerController {
+class BeerController {
   private BeerService service;
 
   public BeerController(BeerService service) {
@@ -65,21 +64,22 @@ public class BeerController {
   /**
    * Create a new Beer.
    *
-   * @param beerRequest json that represents a new beer to be create.
+   * @param requestBeer json that represents a new beer to be create.
+   * @return a {@link Beer} created contend yours id with status code 201.
    */
   @PostMapping
   @ResponseStatus(CREATED)
-  public void saveBeer(@RequestBody Beer beerRequest) {
-    service.save(beerRequest);
+  public Beer save(@RequestBody Beer requestBeer) {
+    return service.save(requestBeer);
   }
 
   /**
    * Obtain all Beers already registered.
    *
-   * @return all beers that exists with status code 200, or, if no content with status code 204.
+   * @return all {@link Beer} that exists with status code 200, or, if no content with status code 204.
    */
   @GetMapping
-  public ResponseEntity<List<Beer>> allBeers() {
+  public ResponseEntity<List<Beer>> findAll() {
     var beers = service.findAll();
     if (beers.isEmpty()) {
       return noContent().build();
@@ -94,10 +94,9 @@ public class BeerController {
    * @return beer's representation in json the specific beer with status code 200, or, not found with status code 404.
    */
   @GetMapping("/{id}")
-  public ResponseEntity<Beer> findBeerById(@PathVariable Long id) {
-    var beer = service.findById(id);
-    return beer.map(ResponseEntity::ok).orElseGet(
-      () -> notFound().build()
+  public ResponseEntity<Beer> findById(@PathVariable Long id) {
+    return ok(
+      service.findById(id)
     );
   }
 
@@ -105,36 +104,30 @@ public class BeerController {
    * Update an specific Beer already exists.
    *
    * @param id that represents the specific Beer.
-   * @param beerRequest json that represents a new beer to be updated.
+   * @param requestBeer json that represents a new beer to be updated.
    * @return beer's representation  in json updated with status code 200, or, not found with status code 404.
    */
   @PutMapping("/{id}")
-  public ResponseEntity<Beer> updateBeer(@PathVariable Long id, @RequestBody Beer beerRequest) {
-    var beerFound = service.findById(id);
-    if (beerFound.isPresent()) {
-      copyProperties(beerRequest, beerFound.get(), "id");
-      service.save(beerFound.get());
-      return ok(beerFound.get());
-    }
-    return notFound().build();
+  public ResponseEntity<Beer> update(@PathVariable Long id, @RequestBody Beer requestBeer) {
+    var foundBeer = service.findById(id);
+    copyProperties(requestBeer, foundBeer, "id");
+    service.save(foundBeer);
+    return ok(foundBeer);
   }
 
   /**
    * Update specifics fields of a Beer, like just a name, a price, or both name and price at same time.
    *
    * @param id that represents the specific Beer
-   * @param beerFields json that represents the fields to be updated.
+   * @param fieldsBeer json that represents the fields to be updated.
    * @return beer's representation  in json with status code 200, or, not found and status code 404.
    */
   @PatchMapping("/{id}")
-  public ResponseEntity<Beer> updatePartialBeer(@PathVariable Long id, @RequestBody Map<String, Object> beerFields) {
-    var beerFound = service.findById(id);
-    if (beerFound.isPresent()) {
-      updateBeerFieldsOnBeerFound(beerFields, beerFound.get());
-      updateBeer(id, beerFound.get());
-      return ok(beerFound.get());
-    }
-    return notFound().build();
+  public ResponseEntity<Beer> parcialUpdate(@PathVariable Long id, @RequestBody Map<String, Object> fieldsBeer) {
+    var foundBeer = service.findById(id);
+    updateFieldsBeerSendOnBeerFound(fieldsBeer, foundBeer);
+    update(id, foundBeer);
+    return ok(foundBeer);
   }
 
   /**
@@ -142,17 +135,17 @@ public class BeerController {
    * The fields are collected and a beerRequestFromFields is generate and full field with them.
    * Each field is getting from beerRequestFromFields and updated on existing beer.
    *
-   * @param beerFields the specifics fields that will be update on an existing beer.
-   * @param beerFound the existing beer that will be updated.
+   * @param fieldsBeer the specifics fields that will be update on an existing beer.
+   * @param foundBeer the existing beer that will be updated.
    */
-  private void updateBeerFieldsOnBeerFound(Map<String, Object> beerFields, Beer beerFound) {
+  private void updateFieldsBeerSendOnBeerFound(Map<String, Object> fieldsBeer, Beer foundBeer) {
     var mapper = new ObjectMapper();
-    var beerRequestFromFields = mapper.convertValue(beerFields, Beer.class);
-    beerFields.forEach((nameField, valueField) -> {
+    var beerRequestFromFields = mapper.convertValue(fieldsBeer, Beer.class);
+    fieldsBeer.forEach((nameField, valueField) -> {
       var field = findField(Beer.class, nameField);
       field.setAccessible(true);
       var value = getField(field, beerRequestFromFields);
-      setField(field, beerFound, value);
+      setField(field, foundBeer, value);
     });
   }
 
@@ -165,11 +158,8 @@ public class BeerController {
   @DeleteMapping("/{id}")
   public ResponseEntity<Beer> deleteBeer(@PathVariable Long id) {
     var beerFound = service.findById(id);
-    if (beerFound.isPresent()) {
-      service.delete(beerFound.get());
-      return noContent().build();
-    }
-    return notFound().build();
+    service.delete(beerFound);
+    return noContent().build();
   }
 
 }

@@ -21,16 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
-package com.beerhouse.craftbeer.api.beer;
+package com.beerhouse.craftbeer.api.domain.exception;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * This classe encapsules Beer's logic from database.
+ * This exception is launch when a specific entity is try to be found, but, it not exists.
  *
  * @author Bruno Andrade
  * @since 1.0
  */
-@Repository
-public interface BeerRepository extends JpaRepository<Beer, Long> {}
+@ResponseStatus(NOT_FOUND)
+public class EntityNotFoundException extends RuntimeException {
+
+  public EntityNotFoundException(String message) {
+    super(message);
+  }
+
+}

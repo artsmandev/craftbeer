@@ -21,10 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE
  */
-package com.beerhouse.craftbeer.api.beer;
+package com.beerhouse.craftbeer.api.domain.beer;
 
+import static java.lang.String.format;
+import static java.util.Objects.nonNull;
+
+import com.beerhouse.craftbeer.api.domain.exception.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,7 +37,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  */
 @Service
-public class BeerService {
+class BeerService {
   private BeerRepository repository;
 
   public BeerService(BeerRepository repository) {
@@ -45,15 +48,22 @@ public class BeerService {
    * Save/Create a new Beer.
    *
    * @param beer that represents a new beer to be save/create.
+   * @return a {@link Beer} created contend yours id.
    */
-  public void save(Beer beer) {
-    repository.save(beer);
+  public Beer save(Beer beer) {
+    var beerFound = repository.save(beer);
+    if (nonNull(beerFound.getId())) {
+      return beerFound;
+    }
+    throw new EntityNotFoundException(
+      format("Beer id %d not found.", beer.getId())
+    );
   }
 
   /**
    * Obtain all Beers already registered.
    *
-   * @return all beers that exists, or, an empty collection.
+   * @return all {@link Beer} that exists, or, an empty collection.
    */
   public List<Beer> findAll() {
     return repository.findAll();
@@ -63,16 +73,18 @@ public class BeerService {
    * Obtain an specific Beer from an specific id.
    *
    * @param id represents the specific Beer.
-   * @return a beer, or, an empty optional.
+   * @return a {@link Beer}, or, an empty optional.
    */
-  public Optional<Beer> findById(long id) {
-    return repository.findById(id);
+  public Beer findById(long id) {
+    return repository.findById(id).orElseThrow(
+      () -> new EntityNotFoundException(format("Beer id %d not found.", id))
+    );
   }
 
   /**
    * Delete an existing Beer from specific id.
    *
-   * @param beer id from the existing beer.
+   * @param beer id from the existing {@link Beer}.
    */
   public void delete(Beer beer) {
     repository.delete(beer);

@@ -21,6 +21,14 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE
   -->
+## Como usar:
+  - Criar a instância do MariaDB no Docker:
+      - `docker run -p 3306:3306 --name mariadb10.4 -e MYSQL_ROOT_PASSWORD=root -d mariadb:10.4`
+  - Realizar o clone do projeto.
+  - Inicializar o projeto:
+      - `mvn spring-boot:run`
+  - Importar a `Collection do Postman` neste [link](https://www.getpostman.com/collections/b5d93fe2eb9da9a692d7).
+
 # Cadastro de cervejas artesanais
 
 O objetivo deste projeto é avaliar o desenvolvimento de uma aplicação java utilizando Spring e APIs.

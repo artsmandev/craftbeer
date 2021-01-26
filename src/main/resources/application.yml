@@ -23,13 +23,17 @@ spring:
   application:
     name: Craft Beer
   datasource:
-    url: jdbc:mariadb://localhost/craftbeer?createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mariadb://localhost/craftbeer?createDatabaseIfNotExist=true&serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8
     username: root
     password: root
     hikari:
       maximum-pool-size: 6
       minimum-idle: 4
       idle-timeout: 10000
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
 server:
   port: 8080
   servlet:
