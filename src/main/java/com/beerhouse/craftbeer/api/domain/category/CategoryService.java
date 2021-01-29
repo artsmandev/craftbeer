@@ -28,7 +28,6 @@ import static java.lang.String.format;
 import com.beerhouse.craftbeer.api.domain.exception.EntityAlreadyExistsException;
 import com.beerhouse.craftbeer.api.domain.exception.EntityInUseException;
 import com.beerhouse.craftbeer.api.domain.exception.EntityNotFoundException;
-import com.beerhouse.craftbeer.api.domain.ingredient.Ingredient;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.dao.DataIntegrityViolationException;

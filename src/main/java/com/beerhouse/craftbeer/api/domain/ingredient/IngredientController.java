@@ -27,7 +27,6 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-import com.beerhouse.craftbeer.api.domain.category.Category;
 import java.util.Set;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,7 +66,7 @@ class IngredientController {
   }
 
   /**
-   * Obtain all Beers already registered.
+   * Obtain all Ingredients already registered.
    *
    * @return all {@link Ingredient} that exists with status code 200.
    */
@@ -80,7 +79,7 @@ class IngredientController {
    * Obtain an specific Ingredient from an specific id.
    *
    * @param id that identified the {@link Ingredient}.
-   * @return ingredient's representation in json the specific beer with status code 200.
+   * @return ingredient's representation in json with status code 200.
    */
   @GetMapping("/{id}")
   Ingredient findById(@PathVariable Long id) {

@@ -27,7 +27,6 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-import com.beerhouse.craftbeer.api.domain.ingredient.Ingredient;
 import java.util.Set;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,7 +79,7 @@ class CategoryController {
    * Obtain an specific Category from an specific id.
    *
    * @param id that identified the {@link Category}.
-   * @return category's representation in json the specific beer with status code 200.
+   * @return category's representation in json the specific category with status code 200.
    */
   @GetMapping("/{id}")
   Category findById(@PathVariable Long id) {

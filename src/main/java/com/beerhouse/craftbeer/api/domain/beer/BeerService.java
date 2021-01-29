@@ -56,7 +56,7 @@ class BeerService {
       return beerFound;
     }
     throw new EntityNotFoundException(
-      format("Beer id %d not found.", beer.getId())
+      format("Beer id: %d, not found.", beer.getId())
     );
   }
 
@@ -77,7 +77,7 @@ class BeerService {
    */
   public Beer findById(long id) {
     return repository.findById(id).orElseThrow(
-      () -> new EntityNotFoundException(format("Beer id %d not found.", id))
+      () -> new EntityNotFoundException(format("Beer id: %d, not found.", id))
     );
   }
 
