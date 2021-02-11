@@ -30,10 +30,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -44,8 +43,8 @@ import lombok.ToString;
  * @author Bruno Andrade
  * @since 1.0
  */
-@NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -58,7 +57,6 @@ public class Category {
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
-  @NonNull
   @Column(nullable = false, unique = true)
   private String name;
 }
